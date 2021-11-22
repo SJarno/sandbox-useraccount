@@ -1,16 +1,14 @@
 package com.jarno.usersandbox.controllers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.annotation.PostConstruct;
 
 import com.jarno.usersandbox.models.UserAccount;
 import com.jarno.usersandbox.repositories.UserAccountRepository;
-import com.jarno.usersandbox.security.CustomUserDetailsService;
-import com.jarno.usersandbox.security.SecurityConfiguration;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,13 +24,10 @@ public class DefaultController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    /* private CustomUserDetailsService userDetailsService;
-
-    private SecurityConfiguration securityConfiguration; */
 
     @GetMapping("/")
     public String index() {
-        //securityConfiguration.authProvider().afterPropertiesSet();
+        
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println();
         System.out.println(auth.getDetails());
@@ -43,7 +38,7 @@ public class DefaultController {
     @PostConstruct
     public void init() {
         userAccountRepository.deleteAll();
-        UserAccount userAccount = new UserAccount("aa", passwordEncoder.encode("bb"), "rooli");
+        UserAccount userAccount = new UserAccount("aa", passwordEncoder.encode("bb"), new ArrayList<>(Arrays.asList("ROLE_ADMIN")));
         userAccountRepository.save(userAccount);
     }
     

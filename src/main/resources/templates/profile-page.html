@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head th:replace="fragments/head :: head-fragment('Profile')">
+    </head>
+    
+<body sec:authorize="isAuthenticated()">
+    <header class="container">
+        <nav>
+            <ul>
+                <li sec:authorize="hasRole('ADMIN')">Admin</li>
+                <li sec:authorize="hasRole('SUPER_USER')">Super user</li>
+                <li sec:authorize="hasRole('USER')">User</li>
+                <li>
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="Logout">
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container">
+        <h1>Profile page: 
+            <span th:text="${#authentication.getPrincipal().getUsername()}"></span>
+        <div>
+            <li th:text="${user.username}"></li>
+        </div>
+    </main>
+    
+</body>
+</html>

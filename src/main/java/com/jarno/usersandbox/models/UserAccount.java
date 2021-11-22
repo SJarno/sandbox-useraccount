@@ -1,6 +1,10 @@
 package com.jarno.usersandbox.models;
 
+import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -17,6 +21,7 @@ public class UserAccount extends AbstractPersistable<Long> {
     private String username;
     private String password;
 
-    private String role;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles;
 
 }

@@ -14,10 +14,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Profile("sec")
+@Profile("dev")
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
+public class DevSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CustomUserDetailsService userDetailsService;
@@ -27,29 +27,33 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         http.csrf().disable();
         http.headers().frameOptions().sameOrigin();
 
-        http.authorizeRequests()
-                .antMatchers("/h2-console", "/h2-console/**").permitAll()
-                .anyRequest().authenticated();
-        http.formLogin()
-                .permitAll();
+        http.authorizeRequests().antMatchers("/h2-console", "/h2-console/**").permitAll().anyRequest().authenticated();
+        http.formLogin().loginPage("/custom-login").loginProcessingUrl("/login").defaultSuccessUrl("/").permitAll();
+        http.logout().clearAuthentication(true).logoutSuccessUrl("/custom-login").permitAll();
     }
+
     /* Works with s-b version 2.5.7 and less */
-    @Autowired
+    /* @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    } */
 
+    /* This also works with spring boot 2.6.0 */
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    /* works with spring boot 2.6.0 */
-    /* @Bean
-    public DaoAuthenticationProvider authProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
-        authProvider.setPasswordEncoder(passwordEncoder());
-        return authProvider;
-    } */
-    
+    /* works with spring boot 2.6.0 and less */
+    /*
+     * @Bean public DaoAuthenticationProvider authProvider() {
+     * DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+     * authProvider.setUserDetailsService(userDetailsService);
+     * authProvider.setPasswordEncoder(passwordEncoder()); return authProvider; }
+     */
+
 }

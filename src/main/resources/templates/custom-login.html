@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head th:replace="fragments/head :: head-fragment('Login page')">
+    </head>
+<body>
+    <header class="container">
+        <nav><h1>Custom login page</h1></nav>
+    </header>
+    <main class="container">
+    <form th:action="@{/login}" method="post">
+        <label for="username">Username:</label>
+        <br>
+        <input type="text" name="username" id="">
+        <br>
+        <label for="password">Password</label>
+        <br>
+        <input type="password" name="password" id="">
+        <input type="submit" value="Submit">
+    </form>
+    </main>
+    
+</body>
+</html>

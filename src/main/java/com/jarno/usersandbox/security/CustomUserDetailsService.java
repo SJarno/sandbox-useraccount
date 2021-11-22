@@ -2,6 +2,7 @@ package com.jarno.usersandbox.security;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.jarno.usersandbox.models.UserAccount;
 import com.jarno.usersandbox.repositories.UserAccountRepository;
@@ -14,7 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@Profile("sec")
+@Profile("dev")
 @Service
 public class CustomUserDetailsService implements UserDetailsService{
 
@@ -32,9 +33,9 @@ public class CustomUserDetailsService implements UserDetailsService{
                 true, 
                 true, 
                 true, 
-                Arrays.asList(
-                    new SimpleGrantedAuthority(optionalAccount.get().getRole())
-                )
+                optionalAccount.get().getRoles().stream()
+                    .map(SimpleGrantedAuthority::new)
+                    .collect(Collectors.toList())
             );
         }
         throw new UsernameNotFoundException("No such user: "+username);
