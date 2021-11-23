@@ -8,9 +8,9 @@ h2, button {
     margin-top: 1rem;
 }
 
-/* p {
-    color: white;
-} */
+nav {
+    text-align: center;
+}
 
 
 #custom-login {
@@ -28,7 +28,19 @@ body {
 
 #profile-card {
     margin-top: 2rem;
-    width: 20rem;
+    width: 25rem;
+}
+#user-register {
+    margin-top: 2rem;
+    width: 25rem;
+}
+
+/* #profile-modal {
+    width: 25rem
+} */
+
+.modal-content {
+    width: 30rem;
 }
 
 

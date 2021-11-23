@@ -10,6 +10,9 @@
         <div class="col text-light row">
             <p sec:authorize="hasRole('ADMIN')" class="col-3">Logged in as admin</p>
         </div>
+        <div th:if="${message}" class="alert alert-success" ><span th:text="${message}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     </main>
 </body>
 

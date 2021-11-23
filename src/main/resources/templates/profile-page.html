@@ -10,20 +10,48 @@
         <div class="col text-light row">
             <p sec:authorize="hasRole('ADMIN')" class="col-3">Logged in as admin</p>
         </div>
+        <!-- Tab element -->
         <section class="row">
-            <div class="col"></div>
-            <article class="col">
-                <div class="card" id="profile-card">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h3 class="card-title" >Perustiedot</h3>
-                      <h4>Nimi: <span th:text=${user.username}></span></h4>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <div th:replace="fragments/modal :: modal-fragment" th:with="user=${user}"></div>
-                    </div>
-                  </div>
-            </article>
-            <div class="col"></div>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Profile info</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">List users</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Create users</button>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                  <!-- Contents of tab: -->
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <!-- First content: Card element  -->
+                    <section class="row">
+                        <div class="col"></div>
+                        <article class="col">
+                            <div class="card" id="profile-card">
+                                <img src="..." class="card-img-top" alt="...">
+                                <div class="card-body">
+                                  <h3 class="card-title" >Perustiedot</h3>
+                                  <h4>Nimi: <span th:text=${user.username}></span></h4>
+                                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                  <div th:replace="fragments/modal :: modal-fragment" th:with="user=${user}"></div>
+                                </div>
+                              </div>
+                        </article>
+                        <div class="col"></div>
+                    </section>
+                </div>
+                <!-- Second content -->
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    Toka
+                </div>
+                <!-- Third content -->
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <section th:replace="fragments/forms :: register-fragment"></section>
+                </div>
+              </div>
         </section>
         
 

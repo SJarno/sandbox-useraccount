@@ -35,7 +35,7 @@ public class DevSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.formLogin()
             .loginPage("/custom-login")
             .loginProcessingUrl("/login")
-            .defaultSuccessUrl("/").permitAll();
+            .defaultSuccessUrl("/success-login").permitAll();
         http.logout()
             .clearAuthentication(true)
             .logoutSuccessUrl("/custom-login")

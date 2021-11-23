@@ -17,6 +17,7 @@
         <section class="row">
             <aside class="col"></aside>
             <article class="col-8 card" id="custom-login">
+                <!-- Form for login -->
                 <form class="mb-3 card-body" th:action="@{/login}" method="post">
                     <h4 class="card-title">Log in</h4>
                     <div class="mb-3">
@@ -27,11 +28,15 @@
                         <label for="password" class="form-label">Password:</label>
                         <input type="password" class="form-control" id="" name="password">
                     </div>
-                    <input type="submit" value="Submit">
+                    <input type="submit" value="Submit" class="btn btn-success">
                 </form>
             </article>
             <aside class="col"></aside>
         </section>
+        <div th:if="${param.error}" class="alert alert-danger">    
+            Invalid username and password.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>     
+        </div>
 
     </main>
 </body>

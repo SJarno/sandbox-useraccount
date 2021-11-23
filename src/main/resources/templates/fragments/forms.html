@@ -1,0 +1,29 @@
+<section th:fragment="register-fragment" class="row">
+    <aside class="col"></aside>
+    <article class="col-8 card" id="user-register">
+        <!-- Form for login -->
+        <form class="mb-3 card-body" th:action="@{/register-user}" method="post">
+            <h4 class="card-title">Register new user</h4>
+            <div class="mb-3">
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" class="form-control" id="username" th:name="username">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" class="form-control" id="password" th:name="password">
+            </div>
+            <div class="mb-3 dropdown">
+                <label for="" class="form-label">Select role:</label>
+                <select class="btn btn-secondary dropdown-toggle form-control" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false" th:name="role">
+                    <option class="dropdown-item" th:value="'ROLE_USER'">Regular user</option>
+                    <option class="dropdown-item" th:value="'ROLE_SUPERVISOR'">Supervisor</option>
+                    <option class="dropdown-item" th:value="'ROLE_SUPER_USER'">Super user</option>
+                </select>
+                
+            </div>
+            <input type="submit" value="Submit" class="btn btn-success">
+        </form>
+    </article>
+    <aside class="col"></aside>
+</section>

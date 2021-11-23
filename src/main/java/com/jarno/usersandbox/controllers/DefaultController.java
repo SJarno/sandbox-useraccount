@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class DefaultController {
@@ -33,12 +34,13 @@ public class DefaultController {
         System.out.println(auth.getDetails());
         System.out.println(auth.getPrincipal());
         System.out.println();
+        
         return "index";
     }
     @PostConstruct
     public void init() {
         userAccountRepository.deleteAll();
-        UserAccount userAccount = new UserAccount("aa", passwordEncoder.encode("bb"), new ArrayList<>(Arrays.asList("ROLE_ADMIN")));
+        UserAccount userAccount = new UserAccount("admin", passwordEncoder.encode("123"), new ArrayList<>(Arrays.asList("ROLE_ADMIN")));
         userAccountRepository.save(userAccount);
     }
     
