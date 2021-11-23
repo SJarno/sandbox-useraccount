@@ -1,23 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head th:replace="fragments/head :: head-fragment('Login page')">
-    </head>
+
+<head th:replace="fragments/head :: head-fragment('Login page')">
+</head>
+
 <body>
-    <header class="container">
-        <nav><h1>Custom login page</h1></nav>
+    <header th:replace="fragments/header :: header-fragment">
     </header>
     <main class="container">
-    <form th:action="@{/login}" method="post">
-        <label for="username">Username:</label>
-        <br>
-        <input type="text" name="username" id="">
-        <br>
-        <label for="password">Password</label>
-        <br>
-        <input type="password" name="password" id="">
-        <input type="submit" value="Submit">
-    </form>
+        <section class="row">
+            <aside class="col"></aside>
+            <article class="col-6">
+            </article>
+            <aside class="col"></aside>
+        </section>
+        <section class="row">
+            <aside class="col"></aside>
+            <article class="col-8 card" id="custom-login">
+                <form class="mb-3 card-body" th:action="@{/login}" method="post">
+                    <h4 class="card-title">Log in</h4>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username:</label>
+                        <input type="text" class="form-control" id="" name="username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" class="form-control" id="" name="password">
+                    </div>
+                    <input type="submit" value="Submit">
+                </form>
+            </article>
+            <aside class="col"></aside>
+        </section>
+
     </main>
-    
 </body>
+
 </html>

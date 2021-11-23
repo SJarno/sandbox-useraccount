@@ -1,0 +1,35 @@
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+h2, button {
+    margin-top: 1rem;
+}
+
+/* p {
+    color: white;
+} */
+
+
+#custom-login {
+    margin-top: 2rem;
+    width: 30rem;
+    
+}
+
+body {
+    background-image: url("../images/body-bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 35rem;
+}
+
+#profile-card {
+    margin-top: 2rem;
+    width: 20rem;
+}
+
+
+

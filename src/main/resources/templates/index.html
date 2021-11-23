@@ -5,15 +5,11 @@
 </head>
 
 <body>
-    <header class="container">
-        <h1>Frontpage</h1>
-        <nav>
-            <ul>
-                <li><a th:href="@{/profile}">To profile page</a></li>
-            </ul>
-        </nav>
-    </header>
+    <header th:replace="fragments/header :: header-fragment"></header>
     <main class="container">
+        <div class="col text-light row">
+            <p sec:authorize="hasRole('ADMIN')" class="col-3">Logged in as admin</p>
+        </div>
     </main>
 </body>
 

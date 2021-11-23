@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head th:replace="fragments/head :: head-fragment('Profile')">
-    </head>
-    
+
+<head th:replace="fragments/head :: head-fragment('Profile')">
+</head>
+
 <body sec:authorize="isAuthenticated()">
-    <header class="container">
-        <nav>
-            <ul>
-                <li sec:authorize="hasRole('ADMIN')">Admin</li>
-                <li sec:authorize="hasRole('SUPER_USER')">Super user</li>
-                <li sec:authorize="hasRole('USER')">User</li>
-                <li>
-                    <form th:action="@{/logout}" method="post">
-                        <input type="submit" value="Logout">
-                    </form>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <header th:replace="fragments/header :: header-fragment"></header>
     <main class="container">
-        <h1>Profile page: 
-            <span th:text="${#authentication.getPrincipal().getUsername()}"></span>
-        <div>
-            <li th:text="${user.username}"></li>
+        <div class="col text-light row">
+            <p sec:authorize="hasRole('ADMIN')" class="col-3">Logged in as admin</p>
         </div>
+        <section class="row">
+            <div class="col"></div>
+            <article class="col">
+                <div class="card" id="profile-card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h3 class="card-title" >Perustiedot</h3>
+                      <h4>Nimi: <span th:text=${user.username}></span></h4>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <div th:replace="fragments/modal :: modal-fragment" th:with="user=${user}"></div>
+                    </div>
+                  </div>
+            </article>
+            <div class="col"></div>
+        </section>
+        
+
     </main>
-    
+
 </body>
+
 </html>

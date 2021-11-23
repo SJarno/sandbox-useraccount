@@ -3,6 +3,7 @@ package com.jarno.usersandbox.security;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -27,9 +28,18 @@ public class DevSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.headers().frameOptions().sameOrigin();
 
-        http.authorizeRequests().antMatchers("/h2-console", "/h2-console/**").permitAll().anyRequest().authenticated();
-        http.formLogin().loginPage("/custom-login").loginProcessingUrl("/login").defaultSuccessUrl("/").permitAll();
-        http.logout().clearAuthentication(true).logoutSuccessUrl("/custom-login").permitAll();
+        http.authorizeRequests()
+            .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+            .antMatchers("/h2-console", "/h2-console/**").permitAll()
+            .anyRequest().authenticated();
+        http.formLogin()
+            .loginPage("/custom-login")
+            .loginProcessingUrl("/login")
+            .defaultSuccessUrl("/").permitAll();
+        http.logout()
+            .clearAuthentication(true)
+            .logoutSuccessUrl("/custom-login")
+            .permitAll();
     }
 
     /* Works with s-b version 2.5.7 and less */

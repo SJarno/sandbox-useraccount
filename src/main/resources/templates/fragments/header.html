@@ -1,0 +1,18 @@
+<header class="container-fluid" th:fragment="header-fragment">
+    <nav class="row navbar navbar-light bg-dark">
+        <h1 sec:authorize="isAnonymous()" class="text-light">Custom login page</h1>
+        <div sec:authorize="isAuthenticated()" class="navbar">
+            <a th:href="@{/}" class="col text-light">
+                <h2>Frontpage</h2>
+            </a>
+            <a th:href="@{/profile}" class="col text-light">
+                <h2>To profile page</h2>
+            </a>
+            <form th:action="@{/logout}" method="post" class="col">
+                <!-- <input type="submit" value="Logout"> -->
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+        
+    </nav>
+</header>
